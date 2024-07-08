@@ -1,0 +1,17 @@
+C:\Users\user\source\repos\chess_WPF\chess_WPF\bin\Debug\chess_WPF.exe.config
+C:\Users\user\source\repos\chess_WPF\chess_WPF\bin\Debug\chess_WPF.exe
+C:\Users\user\source\repos\chess_WPF\chess_WPF\bin\Debug\chess_WPF.pdb
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\MainWindow.g.cs
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\App.g.cs
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF_MarkupCompile.cache
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF_MarkupCompile.lref
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\MainWindow.baml
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF.g.resources
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF.Properties.Resources.resources
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF.csproj.GenerateResource.cache
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF.exe
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF.pdb
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\user\source\repos\chess_WPF\chess_WPF\obj\Debug\chess_WPF_Content.g.cs
