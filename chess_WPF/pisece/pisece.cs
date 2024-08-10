@@ -11,7 +11,7 @@ namespace chess_WPF
         public const bool W = true;
         public const bool B = false;
 
-         protected Board board;
+        protected Board board;
         public bool team { get; set; }
         protected string Symbol;
         public string symbol

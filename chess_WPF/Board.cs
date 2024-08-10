@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,19 +58,25 @@ namespace chess_WPF
                 j1++;
             }
             initializePiseces();
-            Bpice.Add("K", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\BpiceK.png");
-            Bpice.Add("Q", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\BpiceQ.png");
-            Bpice.Add("B", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\BpiceB.png");
-            Bpice.Add("R", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\BpiceR.png");
-            Bpice.Add("N", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\BpiseN.png");
-            Bpice.Add("P", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\BpiceP.png");
+            Bpice.Add("K", GetProjectDirectory("resours\\BpiceK.png"));
+            Bpice.Add("Q", GetProjectDirectory("resours\\BpiceQ.png"));
+            Bpice.Add("B", GetProjectDirectory("resours\\BpiceB.png"));
+            Bpice.Add("R", GetProjectDirectory("resours\\BpiceR.png"));
+            Bpice.Add("N", GetProjectDirectory("resours\\BpiseN.png"));
+            Bpice.Add("P", GetProjectDirectory("resours\\BpiceP.png"));
 
-            Wpice.Add("K", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\WpiceK.png");
-            Wpice.Add("Q", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\WpiceQ.png");
-            Wpice.Add("B", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\WpiceB.png");
-            Wpice.Add("R", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\WpiceR.png");
-            Wpice.Add("N", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\WpiseN.png");
-            Wpice.Add("P", "C:\\Users\\user\\source\\repos\\chess_WPF\\chess_WPF\\resours\\WpiceP.png");
+            Wpice.Add("K", GetProjectDirectory("resours\\WpiceK.png"));
+            Wpice.Add("Q", GetProjectDirectory("resours\\WpiceQ.png"));
+            Wpice.Add("B", GetProjectDirectory("resours\\WpiceB.png"));
+            Wpice.Add("R", GetProjectDirectory("resours\\WpiceR.png"));
+            Wpice.Add("N", GetProjectDirectory("resours\\WpiseN.png"));
+            Wpice.Add("P", GetProjectDirectory("resours\\WpiceP.png"));
+        }
+
+        private string GetProjectDirectory(params string[] paths)
+        {
+            string projectDirectory = Path.Combine(AppContext.BaseDirectory, "..", "..");
+            return Path.GetFullPath(Path.Combine(projectDirectory, Path.Combine(paths)));
         }
 
         private void initializePiseces()
@@ -105,8 +112,9 @@ namespace chess_WPF
             }
         }
 
-        public void printAllP(List<XY> allSteps)
+        public void printAllP(List<XY> allSteps, int column, int row)
         {
+            button_s[column][row].Background = Brushes.LightBlue; 
             for (int i = 0; i < allSteps.Count; i++)
             {
                 if ((board[allSteps[i].Y][allSteps[i].X]?.symbol ?? " ") != "K")
@@ -178,32 +186,6 @@ namespace chess_WPF
             return valid;
         }
 
-
-        //private void round()
-        //{
-        //    string team = (attacking.team == true) ? "Белых" : "Чёрных";
-        //    Console.WriteLine($"Ход {team}");
-        //    pisece Pisece = attacking.choose();
-        //    List<XY> allSteps = Pisece.allSteps();
-        //    printAllP(allSteps);
-        //    XY xy;
-        //    do
-        //    {
-        //        xy = Program.getValidCoordinates();
-        //    } while (!canMove(allSteps, xy));
-
-        //    if (board[xy.Y][xy.X] == null)
-        //    {
-        //        Pisece.move(xy.X, xy.Y);
-        //    }
-        //    else
-        //    {
-        //        protecting.piseces.Remove(board[xy.Y][xy.X]);
-        //        Pisece.move(xy.X, xy.Y);
-        //    }
-        //    initializePiseces();
-
-        //}
         public void kill(pisece pisece)
         {
             protecting.piseces.Remove(pisece);
@@ -230,8 +212,6 @@ namespace chess_WPF
                     if (board[i][j] != null)
                     {
                         button_s[i][j].FontSize = 24;
-                        //button_s[i][j].Foreground = (board[i][j].team) ? Brushes.White : Brushes.Black;
-
                         // Создаем новое изображение для каждой кнопки
                         Image myImage = new Image
                         {
@@ -239,7 +219,7 @@ namespace chess_WPF
                             Stretch = Stretch.Uniform
                         };
 
-                        button_s[i][j].Content = /*board[i][j].symbol*/ myImage;
+                        button_s[i][j].Content = myImage;
                     }
                     else
                     {
@@ -248,16 +228,5 @@ namespace chess_WPF
                 }
             }
         }
-
-
-        //public void Play()
-        //{
-        //    print();
-        //    while (true)
-        //    {
-        //        round();
-        //        print();
-        //    }
-        //}
     }
 }
