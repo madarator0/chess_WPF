@@ -6,7 +6,7 @@ namespace chess_WPF.Models.Pisece
 {
     internal class Rook : ChessPiece
     {
-        public Rook(bool team, int x, int y, Board board) : base(team, "R", x, y, board) { }
+        public Rook(bool team, int x, int y, Board board) : base(team, "R", x, y, board, team ? "../../Resources/WpiceR.png" : "../../Resources/BpiceR.png") { }
 
         public override List<XY> allSteps()
         {

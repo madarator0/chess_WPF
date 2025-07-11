@@ -108,13 +108,13 @@ namespace chess_WPF.ViewModels
                 if (belonging(cell.Piece))
                 {
                     stack.Push(cell);
+                    allSteps.Add(cell.Piece.xy);
                     HighlightPossibleMoves(allSteps);
                 }
             }
             else if (stack.Peek() == cell)
             {
                 stack.Pop();
-                allSteps.Add(new XY(row, column));
                 ClearHighlights();
             }
             else

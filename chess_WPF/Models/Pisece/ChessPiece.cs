@@ -13,12 +13,15 @@ namespace chess_WPF.Models.Pisece
 
         protected Board board;
         public bool team { get; set; }
+
         protected string Symbol;
-        public string symbol
+
+        protected string imagePath;
+        public string ImagePath
         {
             get
             {
-                return Symbol;
+                return imagePath;
             }
         }
 
@@ -29,19 +32,20 @@ namespace chess_WPF.Models.Pisece
             get { return XY; }
         }
 
-        public ChessPiece(bool team, string symbol, int x, int y, Board board)
+        public ChessPiece(bool team, string symbol, int x, int y, Board board, string imagePath)
         {
             this.team = team;
             Symbol = symbol;
             XY = new XY(x, y);
             this.board = board;
+            this.imagePath = imagePath;
         }
 
-        public void move(int x, int y )
+        public void move(int x, int y)
         {
             XY.X = x;
             XY.Y = y;
-        } 
+        }
 
         public abstract List<XY> allSteps();
 
@@ -58,20 +62,5 @@ namespace chess_WPF.Models.Pisece
             return validMoves;
         }
 
-        public virtual string ImagePath
-        {
-            get
-            {
-                if (board == null) return null;
-                var boardType = team ? "W" : "B";
-                string symbolKey = symbol;
-                var dict = team
-                    ? board.GetType().GetField("Wpice", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(board) as Dictionary<string, string>
-                    : board.GetType().GetField("Bpice", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(board) as Dictionary<string, string>;
-                if (dict != null && dict.ContainsKey(symbolKey))
-                    return dict[symbolKey];
-                return null;
-            }
-        }
     }
 }

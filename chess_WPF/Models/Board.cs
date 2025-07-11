@@ -15,10 +15,10 @@ namespace chess_WPF.Models
     {
         private Player player1;
         private Player player2;
-        public Player attacking       { get; private set; }
-        public Player protecting      { get; private set; }
+        public Player attacking { get; private set; }
+        public Player protecting { get; private set; }
 
-        public ChessPiece[][] board       { get; private set; }
+        public ChessPiece[][] board { get; private set; }
 
         private Dictionary<string, string> Bpice = new Dictionary<string, string>();
         private Dictionary<string, string> Wpice = new Dictionary<string, string>();
@@ -132,14 +132,14 @@ namespace chess_WPF.Models
 
         public void kill(ChessPiece pisece)
         {
-            protecting.piseces.Remove(pisece);
-
-            // Удаляем фигуру с доски
             if (pisece != null)
             {
                 var pos = pisece.xy;
                 if (pos.Y >= 0 && pos.Y < 8 && pos.X >= 0 && pos.X < 8)
+                {
                     board[pos.Y][pos.X] = null;
+                    protecting.piseces.Remove(pisece);
+                }
             }
         }
 
@@ -168,70 +168,6 @@ namespace chess_WPF.Models
                 piece1.move(x2, y2);
             if (piece2 != null)
                 piece2.move(x1, y1);
-        }
-
-        public class MoveResult
-        {
-            public bool Success { get; set; }
-            public bool IsCheck { get; set; }
-            public bool IsCheckmate { get; set; }
-            public string Message { get; set; }
-        }
-
-        public MoveResult TryMove(int fromX, int fromY, int toX, int toY)
-        {
-            var result = new MoveResult();
-            var movingPiece = board[fromY][fromX];
-            if (movingPiece == null)
-            {
-                result.Success = false;
-                result.Message = "Нет фигуры для перемещения.";
-                return result;
-            }
-
-            // Проверка принадлежности фигуры текущему игроку
-            if (movingPiece.team != attacking.team)
-            {
-                result.Success = false;
-                result.Message = "Нельзя ходить чужой фигурой.";
-                return result;
-            }
-
-            // Получение всех возможных ходов
-            var validMoves = movingPiece.validMoves();
-            var targetXY = new XY(toX, toY);
-            if (!validMoves.Contains(targetXY))
-            {
-                result.Success = false;
-                result.Message = "Недопустимый ход.";
-                return result;
-            }
-
-            // Взятие фигуры противника
-            var targetPiece = board[toY][toX];
-            if (targetPiece != null && targetPiece.team != movingPiece.team)
-            {
-                kill(targetPiece);
-            }
-
-            // Перемещение фигуры
-            SwapPieces(fromX, fromY, toX, toY);
-
-            // Смена очереди
-            swap();
-
-            // Проверка шаха и мата
-            result.IsCheck = isCheck(protecting);
-            result.IsCheckmate = isCheckmate(protecting);
-            result.Success = true;
-            if (result.IsCheckmate)
-                result.Message = $"{(protecting.team ? "Белым" : "Чёрным")} мат!";
-            else if (result.IsCheck)
-                result.Message = $"{(protecting.team ? "Белым" : "Чёрным")} шах!";
-            else
-                result.Message = "Ход выполнен.";
-
-            return result;
         }
     }
 }

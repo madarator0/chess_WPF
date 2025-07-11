@@ -8,7 +8,7 @@ namespace chess_WPF.Models.Pisece
 {
     internal class Knight : ChessPiece
     {
-        public Knight(bool team, int x, int y, Board board) : base(team, "N", x, y, board) { }
+        public Knight(bool team, int x, int y, Board board) : base(team, "N", x, y, board, team ? "../../Resources/WpiseN.png" : "../../Resources/BpiseN.png") { }
 
         public override List<XY> allSteps()
         {

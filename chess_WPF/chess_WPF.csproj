@@ -134,8 +134,9 @@
     <Resource Include="Resources\WpiceQ.png" />
     <Resource Include="Resources\WpiceP.png" />
     <Resource Include="Resources\WpiceB.png" />
-    <Content Include="Resources\WpiceK.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\WpiceK.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
