@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace chess_WPF
+namespace chess_WPF.Models.Pisece
 {
-    internal class King : pisece
+    internal class King : ChessPiece
     {
         public King(bool team, int x, int y, Board board) : base(team, "K", x, y, board) { }
 

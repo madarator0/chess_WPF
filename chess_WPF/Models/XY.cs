@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace chess_WPF
 {
-    internal class XY
+    public class XY
     {
         public int X { get; set; }
         public int Y { get; set; }

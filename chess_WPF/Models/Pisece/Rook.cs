@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Windows.Documents;
 
-namespace chess_WPF
+namespace chess_WPF.Models.Pisece
 {
-    internal class Rook : pisece
+    internal class Rook : ChessPiece
     {
         public Rook(bool team, int x, int y, Board board) : base(team, "R", x, y, board) { }
 

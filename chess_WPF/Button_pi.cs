@@ -1,14 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using chess_WPF.Models.Pisece;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace chess_WPF
 {
-    class Button_pi : Button
+    public class Button_pi : Button
     {
-        public pisece pisece { get; set; } = null;
+        public static readonly DependencyProperty PieceProperty =
+            DependencyProperty.Register(
+                "Piece",
+                typeof(ChessPiece),
+                typeof(Button_pi),
+                new PropertyMetadata(null));
+
+        public ChessPiece Piece
+        {
+            get { return (ChessPiece)GetValue(PieceProperty); }
+            set { SetValue(PieceProperty, value); }
+        }
     }
 }
