@@ -8,7 +8,7 @@ namespace chess_WPF.Models.Pisece
 {
     internal class Bishop : ChessPiece
     {
-        public Bishop(bool team, int x, int y, Board board) : base(team, "B", x, y, board, team ? "../../Resources/WpiceB.png" : "../../Resources/BpiceB.png") { }
+        public Bishop(TeamSide team, int x, int y, Board board) : base(team, x, y, board, team is TeamSide.White ? "../../Resources/WpiceB.png" : "../../Resources/BpiceB.png") { }
 
         public override List<XY> allSteps()
         {
@@ -24,7 +24,7 @@ namespace chess_WPF.Models.Pisece
                         int nx = xy.X + dx * i;
                         int ny = xy.Y + dy * i;
 
-                        // Check if the new position is within the board bounds and a valid move
+                        // Check if the new position is within the _board bounds and a valid move
                         if (isValidMove(nx, ny))
                         {
                             steps.Add(new XY(nx, ny));
@@ -46,8 +46,8 @@ namespace chess_WPF.Models.Pisece
 
         private bool isValidMove(int x, int y)
         {
-            // Ensure move is within board bounds and is not occupied by a piece of the same team
-            return x >= 0 && x < 8 && y >= 0 && y < 8 && (board.board[y][x] == null || board.board[y][x].team != team);
+            // Ensure move is within _board bounds and is not occupied by a piece of the same team
+            return x >= 0 && x < 8 && y >= 0 && y < 8 && (board.board[y][x] == null || board.board[y][x].Team != Team);
         }
     }
 

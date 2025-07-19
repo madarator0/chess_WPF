@@ -8,13 +8,8 @@ namespace chess_WPF.Models.Pisece
 {
     public abstract class ChessPiece
     {
-        public const bool W = true;
-        public const bool B = false;
-
         protected Board board;
-        public bool team { get; set; }
-
-        protected string Symbol;
+        public TeamSide Team { get; set; }
 
         protected string imagePath;
         public string ImagePath
@@ -32,10 +27,9 @@ namespace chess_WPF.Models.Pisece
             get { return XY; }
         }
 
-        public ChessPiece(bool team, string symbol, int x, int y, Board board, string imagePath)
+        public ChessPiece(TeamSide team, int x, int y, Board board, string imagePath)
         {
-            this.team = team;
-            Symbol = symbol;
+            Team = team;
             XY = new XY(x, y);
             this.board = board;
             this.imagePath = imagePath;

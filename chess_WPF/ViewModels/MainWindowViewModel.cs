@@ -138,7 +138,7 @@ namespace chess_WPF.ViewModels
 
         private bool belonging(ChessPiece pisece)
         {
-            return pisece.team == board.teamA();
+            return pisece.Team == board.teamA();
         }
 
         private void CheckForCheck()
@@ -146,7 +146,7 @@ namespace chess_WPF.ViewModels
             if (board.isCheck(board.protecting))
             {
                 // Здесь можно реализовать уведомление через событие или свойство
-                // Например, Message = $"{(board.protecting.team ? "Белым" : "Чёрным")} шах";
+                // Например, Message = $"{(_board.protecting.team ? "Белым" : "Чёрным")} шах";
             }
         }
 

@@ -59,6 +59,7 @@
     <Compile Include="Button_pi.cs" />
     <Compile Include="Models\Pisece\Queen.cs" />
     <Compile Include="Models\Pisece\Rook.cs" />
+    <Compile Include="Models\TeamSide.cs" />
     <Compile Include="Models\XY.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

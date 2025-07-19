@@ -6,7 +6,7 @@ namespace chess_WPF.Models.Pisece
 {
     internal class Rook : ChessPiece
     {
-        public Rook(bool team, int x, int y, Board board) : base(team, "R", x, y, board, team ? "../../Resources/WpiceR.png" : "../../Resources/BpiceR.png") { }
+        public Rook(TeamSide team, int x, int y, Board board) : base(team, x, y, board, team is TeamSide.White ? "../../Resources/WpiceR.png" : "../../Resources/BpiceR.png") { }
 
         public override List<XY> allSteps()
         {
@@ -31,7 +31,7 @@ namespace chess_WPF.Models.Pisece
             {
                 steps.Add(new XY(newX, newY));
 
-                if (board.board[newY][newX] != null && board.board[newY][newX].team != team)
+                if (board.board[newY][newX] != null && board.board[newY][newX].Team != Team)
                 {
                     break; // Stop if the move captures an opponent's piece
                 }
@@ -45,8 +45,8 @@ namespace chess_WPF.Models.Pisece
 
         private bool isValidMove(int x, int y)
         {
-            // Ensure move is within board bounds and target square is either empty or contains opponent piece
-            return x >= 0 && x < 8 && y >= 0 && y < 8 && (board.board[y][x] == null || board.board[y][x].team != team);
+            // Ensure move is within _board bounds and target square is either empty or contains opponent piece
+            return x >= 0 && x < 8 && y >= 0 && y < 8 && (board.board[y][x] == null || board.board[y][x].Team != Team);
         }
     }
 }

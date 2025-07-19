@@ -9,15 +9,13 @@ namespace chess_WPF.Models
 {
     public class Player
     {
-        private Board board;
-        public bool team { get; }
+        public TeamSide Team { get; }
         public List<ChessPiece> piseces { get; } = new List<ChessPiece>();
 
-        public Player(Board board, bool team)
+        public Player(Board board, TeamSide team)
         {
-            this.board = board;
-            this.team = team;
-            if (team)
+            Team = team;
+            if (team is TeamSide.White)
             {
                 piseces.Add(new King(team, 4, 0, board));
                 piseces.Add(new Queen(team, 3, 0, board));

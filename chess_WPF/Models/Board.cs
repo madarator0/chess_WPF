@@ -20,13 +20,10 @@ namespace chess_WPF.Models
 
         public ChessPiece[][] board { get; private set; }
 
-        private Dictionary<string, string> Bpice = new Dictionary<string, string>();
-        private Dictionary<string, string> Wpice = new Dictionary<string, string>();
-
         public Board()
         {
-            player1 = new Player(this, ChessPiece.W);
-            player2 = new Player(this, ChessPiece.B);
+            player1 = new Player(this, TeamSide.White);
+            player2 = new Player(this, TeamSide.Black);
             board = new ChessPiece[8][];
             for (int i = 0; i < 8; i++)
             {
@@ -35,25 +32,6 @@ namespace chess_WPF.Models
             attacking = player1;
             protecting = player2;
             initializePiseces();
-            Bpice.Add("K", GetProjectDirectory("Resources\\BpiceK.png"));
-            Bpice.Add("Q", GetProjectDirectory("Resources\\BpiceQ.png"));
-            Bpice.Add("B", GetProjectDirectory("Resources\\BpiceB.png"));
-            Bpice.Add("R", GetProjectDirectory("Resources\\BpiceR.png"));
-            Bpice.Add("N", GetProjectDirectory("Resources\\BpiseN.png"));
-            Bpice.Add("P", GetProjectDirectory("Resources\\BpiceP.png"));
-
-            Wpice.Add("K", GetProjectDirectory("Resources\\WpiceK.png"));
-            Wpice.Add("Q", GetProjectDirectory("Resources\\WpiceQ.png"));
-            Wpice.Add("B", GetProjectDirectory("Resources\\WpiceB.png"));
-            Wpice.Add("R", GetProjectDirectory("Resources\\WpiceR.png"));
-            Wpice.Add("N", GetProjectDirectory("Resources\\WpiseN.png"));
-            Wpice.Add("P", GetProjectDirectory("Resources\\WpiceP.png"));
-        }
-
-        private string GetProjectDirectory(params string[] paths)
-        {
-            string projectDirectory = Path.Combine(AppContext.BaseDirectory, "..", "..");
-            return Path.GetFullPath(Path.Combine(projectDirectory, Path.Combine(paths)));
         }
 
         private void initializePiseces()
@@ -79,12 +57,7 @@ namespace chess_WPF.Models
 
         public bool canMove(List<XY> allSteps, XY xy)
         {
-            ChessPiece tmp = board[xy.Y][xy.X];
-            if (!(tmp is King))
-            {
-                return allSteps.Contains(xy);
-            }
-            return false;
+            return allSteps.Contains(xy);
         }
 
         public bool isCheck(Player player)
@@ -143,9 +116,9 @@ namespace chess_WPF.Models
             }
         }
 
-        public bool teamA()
+        public TeamSide teamA()
         {
-            return attacking.team;
+            return attacking.Team;
         }
 
         public void swap()
