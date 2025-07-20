@@ -41,12 +41,12 @@ namespace chess_WPF.Models.Pisece
             XY.Y = y;
         }
 
-        public abstract List<XY> allSteps();
+        public abstract List<XY> GetAllMoves();
 
         public List<XY> validMoves()
         {
             var validMoves = new List<XY>();
-            foreach (var move in allSteps())
+            foreach (var move in GetAllMoves())
             {
                 if (board.isValidMove(this, move))
                 {

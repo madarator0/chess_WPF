@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace chess_WPF.Models.Pisece
 {
-    internal class King : ChessPiece
+    public class King : ChessPiece
     {
         public King(TeamSide team, int x, int y, Board board) : base(team, x, y, board, team is TeamSide.White ? "../../Resources/WpiceK.png" : "../../Resources/BpiceK.png") { }
 
-        public override List<XY> allSteps()
+        public override List<XY> GetAllMoves()
         {
             List<XY> steps = new List<XY>();
 

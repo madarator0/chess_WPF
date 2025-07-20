@@ -8,7 +8,7 @@ namespace chess_WPF.Models.Pisece
     {
         public Rook(TeamSide team, int x, int y, Board board) : base(team, x, y, board, team is TeamSide.White ? "../../Resources/WpiceR.png" : "../../Resources/BpiceR.png") { }
 
-        public override List<XY> allSteps()
+        public override List<XY> GetAllMoves()
         {
             List<XY> steps = new List<XY>();
 

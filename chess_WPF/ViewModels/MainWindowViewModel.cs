@@ -77,21 +77,18 @@ namespace chess_WPF.ViewModels
             if (stack.Count > 0)
             {
                 var selectedCell = stack.Peek();
-                List<XY> steps = selectedCell.Piece.allSteps();
-                if (board.canMove(steps, new XY(row, column)))
+                if (board.IsValidStep(selectedCell.Piece, new XY(row, column)))
                 {
-                    steps.Add(selectedCell.Piece.xy);
                     // Подсветку сбрасываем
                     ClearHighlights();
                     // Вместо selectedCell.Piece.move(row, column);
                     board.SwapPieces(selectedCell.Piece.xy.X, selectedCell.Piece.xy.Y, row, column);
                     stack.Pop();
-                    board.swap();
+                    board.SwitchPlayers();
                     isWhiteTurn = !isWhiteTurn;
                 }
                 else
                 {
-                    steps.Add(selectedCell.Piece.xy);
                     ClearHighlights();
                     stack.Pop();
                 }
@@ -100,12 +97,12 @@ namespace chess_WPF.ViewModels
 
         private void HandleOccupiedButtonClick(CellViewModel cell, int row, int column)
         {
-            List<XY> allSteps = board.board[column][row].allSteps();
+            List<XY> allSteps = board.board[column][row].GetAllMoves();
             var king = board.protecting.piseces.Find(p1 => p1 is King);
             allSteps.Remove(king.xy);
             if (stack.Count == 0)
             {
-                if (belonging(cell.Piece))
+                if (IsAttackingTeamPiece(cell.Piece))
                 {
                     stack.Push(cell);
                     allSteps.Add(cell.Piece.xy);
@@ -120,25 +117,23 @@ namespace chess_WPF.ViewModels
             else
             {
                 var selectedCell = stack.Peek();
-                List<XY> steps = selectedCell.Piece.allSteps();
-                if (board.canMove(steps, new XY(row, column)))
+                if (board.IsValidStep(selectedCell.Piece, new XY(row, column)))
                 {
-                    steps.Add(selectedCell.Piece.xy);
                     ClearHighlights();
                     board.kill(board.board[column][row]);
                     // Используем SwapPieces для перемещения и взятия
                     board.SwapPieces(selectedCell.Piece.xy.X, selectedCell.Piece.xy.Y, row, column);
                     stack.Pop();
                     CheckForCheck();
-                    board.swap();
+                    board.SwitchPlayers();
                     isWhiteTurn = !isWhiteTurn;
                 }
             }
         }
 
-        private bool belonging(ChessPiece pisece)
+        private bool IsAttackingTeamPiece(ChessPiece pisece)
         {
-            return pisece.Team == board.teamA();
+            return pisece.Team == board.GetAttackingTeam();
         }
 
         private void CheckForCheck()

@@ -46,5 +46,40 @@ namespace chess_WPF.Models
                 }
             }
         }
+        
+        /// <summary>
+        /// Находит короля этого игрока
+        /// </summary>
+        public King GetKing()
+        {
+            return piseces.Find(p => p is King) as King;
+        }
+        
+        /// <summary>
+        /// Проверяет, есть ли у игрока доступные ходы
+        /// </summary>
+        public bool HasAvailableMoves()
+        {
+            return piseces.Any(p => p.validMoves().Count > 0);
+        }
+        
+        /// <summary>
+        /// Проверяет, принадлежит ли фигура этому игроку
+        /// </summary>
+        public bool OwnsPiece(ChessPiece piece)
+        {
+            return piece?.Team == Team;
+        }
+        
+        /// <summary>
+        /// Удаляет фигуру из списка фигур игрока
+        /// </summary>
+        public void RemovePiece(ChessPiece piece)
+        {
+            if (piece != null)
+            {
+                piseces.Remove(piece);
+            }
+        }
     }
 }

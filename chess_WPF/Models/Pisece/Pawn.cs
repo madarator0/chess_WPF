@@ -10,7 +10,7 @@ namespace chess_WPF.Models.Pisece
     {
         public Pawn(TeamSide team, int x, int y, Board board) : base(team, x, y, board, team is TeamSide.White ? "../../Resources/WpiceP.png" : "../../Resources/BpiceP.png") { }
 
-        public override List<XY> allSteps()
+        public override List<XY> GetAllMoves()
         {
             List<XY> steps = new List<XY>();
             int direction = Team is TeamSide.White ? 1 : -1;

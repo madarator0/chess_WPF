@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace chess_WPF
 {
-    public class XY
+    public struct XY
     {
         public int X { get; set; }
         public int Y { get; set; }

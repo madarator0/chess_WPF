@@ -10,7 +10,7 @@ namespace chess_WPF.Models.Pisece
     {
         public Queen(TeamSide team, int x, int y, Board board) : base(team, x, y, board, team is TeamSide.White ? "../../Resources/WpiceQ.png" : "../../Resources/BpiceQ.png") { }
 
-        public override List<XY> allSteps()
+        public override List<XY> GetAllMoves()
         {
             List<XY> steps = new List<XY>();
 
@@ -18,8 +18,8 @@ namespace chess_WPF.Models.Pisece
             Rook rook = new Rook(Team, xy.X, xy.Y, board);
             Bishop bishop = new Bishop(Team, xy.X, xy.Y, board);
 
-            steps.AddRange(rook.allSteps());
-            steps.AddRange(bishop.allSteps());
+            steps.AddRange(rook.GetAllMoves());
+            steps.AddRange(bishop.GetAllMoves());
 
             return steps;
         }
